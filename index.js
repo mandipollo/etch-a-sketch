@@ -1,34 +1,60 @@
+///
+
 `strict`;
 
-// dom
-const container = document.getElementById(`container`);
-const rows = document.getElementsByClassName(`gridrow`);
-const cells = document.getElementsByClassName(`cell`);
+let color = `black`;
+// populate board
+function etch(size) {
+  let board = document.querySelector(`.board`);
+  let squares = board.querySelectorAll(`div`);
+  squares.forEach((div) => div.remove());
 
-// create a row
+  let amount = size * size;
+  board.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+  board.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
-function createRow(size) {
-  for (let i = 0; i < size; i++) {
-    let row = document.createElement(`div`);
-    container.appendChild(row).className = `gridrow`;
+  for (let i = 0; i < amount; i++) {
+    let square = document.createElement(`div`);
+    square.addEventListener(`mouseover`, colorBoard);
+    square.style.backgroundColor = `white`;
+    board.appendChild(square);
   }
 }
 
-// create columns
-
-function createColumn(size) {
-  for (let i = 0; i < rows.length; i++) {
-    for (let j = 0; j < size; j++) {
-      let column = document.createElement(`div`);
-      rows[j].appendChild(column).className = `cell`;
-    }
+// input size for board
+function changeSize(input) {
+  if (input >= 16 && input <= 100) {
+    etch(input);
+  } else {
+    console.log(`please input between 16 and 100`);
   }
 }
 
-defaultGrid();
-// make a default grid
+// color the board
 
-function defaultGrid() {
-  createRow(16);
-  createColumn(16);
+function colorBoard() {
+  this.style.backgroundColor = color;
+}
+
+// change color
+function changeColor(choice) {
+  color = choice;
+}
+
+/// random color
+
+function colorSquare() {
+  if (color === `random `) {
+    this.style.backgroundColor = `hs1($(Math.random() * 360), 100%, 50%)`;
+  } else {
+    this.style.backgroundColor = color;
+  }
+}
+
+// reset
+
+function reset() {
+  let board = document.querySelector(`.board`);
+  let squares = board.querySelectorAll(`div`);
+  squares.forEach((div) => (div.style.backgroundColor = `white`));
 }

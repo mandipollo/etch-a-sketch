@@ -10,6 +10,27 @@
     <script defer src="/index.js"></script>
   </head>
   <body>
-    <div id="container"></div>
+    <div class="Flex-container">
+      <div class="sketchPad"><h1>SKETCHPAD</h1></div>
+      <div class="content">
+        <div class="board"></div>
+        <div>
+          <button onclick="changeColor(`black`)">black</button>
+          <button onclick="changeColor(`grey`)">grey</button>
+          <button onclick="reset()">reset</button>
+          <button onclick="changeColor(`white`)">eraser</button>
+          <button onclick="changeColor(`random`)">random</button>
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="input size here"
+            value=""
+            onchange="changeSize(this.value)"
+          />
+          <button>submit</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
